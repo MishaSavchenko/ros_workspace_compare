@@ -1,0 +1,71 @@
+:root {
+    color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #333;
+        color: white;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background: #ddd;
+        color: black;
+    }
+}
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+    background-color: #0E1116;
+    color: #EAE8FF;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active,
+.collapsible:hover {
+    background-color: #0E1116;
+    outline-width: 2px;
+    outline-style: solid;
+    outline-color: #EAE8FF;
+
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+    padding: 0px 0px;
+    display: none;
+    overflow: hidden;
+    background-color: #030101;
+    color: #030101;
+}
+
+.workspace_data {
+    white-space: pre;
+}
+
+.past_workspace {
+    width: 49.9%;
+    float: left;
+    background-color: #726DA8;
+}
+
+.current_workspace {
+    width: 49.9%;
+    float: right;
+    background-color: #88D498;
+
+}
+
+.workspace_title {
+    text-align: center;
+    padding-top: 10px;
+}

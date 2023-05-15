@@ -1,0 +1,19 @@
+{
+  "name": "ros_workspace_compare",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Misha Savchenko",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^24.2.0"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.1",
+    "npm-fetch": "^0.0.9",
+    "yaml": "^2.2.2"
+  }
+}
