@@ -6,10 +6,39 @@
     <title>Hello World!</title>
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <link rel="stylesheet" type="text/css" href="./styles.css">
+    <style type="text/css">
+        table.diff {
+            font-family: Courier;
+            border: medium;
+        }
+
+        .diff_header {
+            background-color: #e0e0e0
+        }
+
+        td.diff_header {
+            text-align: right
+        }
+
+        .diff_next {
+            background-color: #c0c0c0
+        }
+
+        .diff_add {
+            background-color: #aaffaa
+        }
+
+        .diff_chg {
+            background-color: #ffff77
+        }
+
+        .diff_sub {
+            background-color: #ffaaaa
+        }
+    </style>
 </head>
 
 <body>
-    <!-- <input type="file" id="dirs" /> -->
     <button type="button" id="dirs">Open Workspace</button>
     <div>
         <strong> Current Workspace </strong>
@@ -30,9 +59,11 @@
         </div>
     </div>
 
+    <button type="button" id="ws_comp">Workspace Compare Test</button>
+    <div id="ws_comp_res"></div>
+
     <script src="renderer.js"></script>
 
 </body>
-
 
 </html>

@@ -16,3 +16,9 @@ for (var i = 0; i < coll.length; i++) {
         }
     });
 }
+
+document.getElementById('ws_comp').addEventListener('click', () => {
+    window.postMessage({
+        type: 'ws-comp'
+    })
+})

@@ -24,6 +24,7 @@ function createWindow() {
     mainWindow.webContents.openDevTools();
 
     mainWindow.loadFile('index.html')
+    // mainWindow.loadFile('diff.html')
     mainWindow.on('closed', function () {
         mainWindow = null;
         subpy.kill('SIGINT');
@@ -50,6 +51,30 @@ ipcMain.handle('select-dirs', async (event, args) => {
     event.returnValue = vcs_result;
 
     return vcs_result;
+})
+
+async function ws_comp() {
+    // console.log("ws-comp-test");
+    return await fetch(mainAddr + "/workspace_compare_test")
+        .then(response => response.json())
+        .then(data => {
+            return data;
+        });
+}
+
+ipcMain.handle('ws-comp', async (event, args) => {
+    let comp_res = await ws_comp();
+    return comp_res["res"];
+
+    // console.log(comp_res);
+    // for (const key of Object.keys(vcs_result)) {
+    //     const inner_res = JSON.parse(vcs_result[key]);
+    //     vcs_result[key] = inner_res;
+    // };
+
+    // event.returnValue = vcs_result;
+    // console.log("geez i hope i get a second date");
+    // return "heyheyhey";
 })
 
 app.whenReady().then(() => {
