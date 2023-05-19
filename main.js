@@ -63,8 +63,9 @@ async function ws_comp() {
 }
 
 ipcMain.handle('ws-comp', async (event, args) => {
-    let comp_res = await ws_comp();
-    return comp_res["res"];
+    return await ws_comp();
+    // let comp_res = await ws_comp();
+    // return comp_res;
 
     // console.log(comp_res);
     // for (const key of Object.keys(vcs_result)) {
