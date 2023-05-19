@@ -32,8 +32,8 @@ class VCCompare:
         return json.dumps(yaml.load(val, Loader=SafeLoader), indent=4)
 
     def workspace_compare(self):
-        ws_a_file = "/home/misha/code/ros_workspace_compare/vcs_manager/test/ws_a"
-        ws_b_file = "/home/misha/code/ros_workspace_compare/vcs_manager/test/ws_b"
+        ws_a_file = "/home/misha/code/ros_workspace_compare/vcs_manager/test/ws_a.yaml"
+        ws_b_file = "/home/misha/code/ros_workspace_compare/vcs_manager/test/ws_b.yaml"
 
         with open(ws_a_file, "r") as f:
             # ws_a_data = f.read()
@@ -45,13 +45,13 @@ class VCCompare:
             # ws_b = json.loads(ws_b_data)
             ws_b = f.read()
 
-        # first_file_lines = ws_a.splitlines()
+        first_file_lines = ws_a.splitlines()
 
         second_file_lines = ws_b.splitlines()
-        first_file_lines = [""] * len(second_file_lines)
+        # first_file_lines = [""] * len(second_file_lines)
 
         html_diff = difflib.HtmlDiff().make_file(first_file_lines, second_file_lines)
-        return html_diff
+        return {"/home/misha/code/test_ws/src": html_diff}
 
 
 if __name__ == "__main__":
