@@ -1,3 +1,5 @@
+const { collapsable_callback } = require('./lib.js');
+
 document.getElementById('dirs').addEventListener('click', () => {
     window.postMessage({
         type: 'select-dirs'
@@ -6,16 +8,9 @@ document.getElementById('dirs').addEventListener('click', () => {
 
 var coll = document.getElementsByClassName("collapsible");
 for (var i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function () {
-        this.classList.toggle("active");
-        var content = this.nextElementSibling;
-        if (content.style.display === "block") {
-            content.style.display = "none";
-        } else {
-            content.style.display = "block";
-        }
-    });
+    coll[i].addEventListener("click", collapsable_callback);
 }
+
 
 document.getElementById('ws_comp').addEventListener('click', () => {
     window.postMessage({

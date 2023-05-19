@@ -1,5 +1,7 @@
 const { contextBridge, ipcRenderer } = require('electron')
 const YAML = require('yaml');
+const { collapsable_callback } = require('./lib.js');
+
 
 window.addEventListener('message', async evt => {
     if (evt.data.type === 'select-dirs') {
@@ -19,8 +21,6 @@ window.addEventListener('message', async evt => {
     }
 })
 
-
-
 window.addEventListener('message', async evt => {
     if (evt.data.type === 'ws-comp') {
         const res = await ipcRenderer.invoke('ws-comp').then((result) => {
@@ -38,6 +38,7 @@ window.addEventListener('message', async evt => {
         collapsable.style.display = 'block';
         collapsable.removeAttribute('id');
         collapsable.appendChild(table);
+        collapsable.getElementsByClassName("collapsible")[0].addEventListener("click", collapsable_callback);
 
         document.body.appendChild(collapsable);
     }
