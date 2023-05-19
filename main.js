@@ -31,30 +31,7 @@ function createWindow() {
     });
 }
 
-async function get_directories(directory) {
-    console.log("getting directories");
-    return await fetch(mainAddr + "/add_workspace/" + directory)
-        .then(response => response.json())
-        .then(data => {
-            return data;
-        });
-}
-
-ipcMain.handle('select-dirs', async (event, args) => {
-    let vcs_result = await get_directories("/home/misha/code/wbc_ws/src");
-
-    for (const key of Object.keys(vcs_result)) {
-        const inner_res = JSON.parse(vcs_result[key]);
-        vcs_result[key] = inner_res;
-    };
-
-    event.returnValue = vcs_result;
-
-    return vcs_result;
-})
-
 async function ws_comp() {
-    // console.log("ws-comp-test");
     return await fetch(mainAddr + "/workspace_compare_test")
         .then(response => response.json())
         .then(data => {
@@ -64,18 +41,6 @@ async function ws_comp() {
 
 ipcMain.handle('ws-comp', async (event, args) => {
     return await ws_comp();
-    // let comp_res = await ws_comp();
-    // return comp_res;
-
-    // console.log(comp_res);
-    // for (const key of Object.keys(vcs_result)) {
-    //     const inner_res = JSON.parse(vcs_result[key]);
-    //     vcs_result[key] = inner_res;
-    // };
-
-    // event.returnValue = vcs_result;
-    // console.log("geez i hope i get a second date");
-    // return "heyheyhey";
 })
 
 app.whenReady().then(() => {
