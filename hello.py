@@ -28,12 +28,7 @@ def add_workspace(directory):
 
 @app.route('/workspace_compare_test')
 def workspace_compare():
-    # return directory
-    res = vc_compare.workspace_compare()
-    return {"res": res}
-    # return {"res": "hey"}
-    # headers = {res}
-    # return headers
+    return vc_compare.workspace_compare()
 
 
 if __name__ == "__main__":
