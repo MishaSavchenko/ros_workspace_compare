@@ -69,3 +69,35 @@
     text-align: center;
     padding-top: 10px;
 }
+
+
+/* python difflib table stylings */
+
+table.diff {
+    /* font-family: Courier;
+    border: medium; */
+}
+
+.diff_header {
+    background-color: var(--background)
+}
+
+td.diff_header {
+    text-align: right
+}
+
+.diff_next {
+    background-color: var(--purple)
+}
+
+.diff_add {
+    background-color: var(--green)
+}
+
+.diff_chg {
+    background-color: var(--yellow)
+}
+
+.diff_sub {
+    background-color: var(--orange)
+}
