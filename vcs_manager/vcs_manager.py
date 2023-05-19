@@ -28,6 +28,7 @@ class VCCompare:
         # print(type(local_stdout.getvalue()))
         val = local_stdout.getvalue()
         val = val[val.find('\n'):]
+        return yaml.dumps(yaml.load(val, Loader=SafeLoader), indent=4)
         return json.dumps(yaml.load(val, Loader=SafeLoader), indent=4)
 
     def workspace_compare(self):
