@@ -2,40 +2,55 @@ import sys
 import time
 
 from watchdog.observers import Observer
-from events import WorkspaceEventHandler
+from .events import WorkspaceEventHandler
+
+
+class WorkspaceWatcher(threading.Thread):
+    watched_workspaces = ["/home/misha/code/test_ws/src",
+                          "/home/misha/code/wbc_ws/src"]
+    event_handlers = []
+    last_event_times = []
 
 
 class WorkspaceWatcher:
     def __init__(self):
 
-        self.__src_path = "/home/misha/code/test_ws/src"
-        self.__event_handler = WorkspaceEventHandler(self.__src_path)
+
+        for workspace in self.watched_workspaces:
+            self.event_handlers.append(WorkspaceEventHandler(workspace))
         self.__event_observer = Observer()
 
+
     def run(self):
-        self.start()
+        self.watchdog_start()
         try:
             while True:
-                print(self.__event_handler.last_time)
+                for indx, handler in enumerate(self.event_handlers):
+                    if self.last_event_times[indx] - handler.last_time < -1.0:
+                        self.last_event_times[indx] = handler.last_time
+
                 time.sleep(1)
         except KeyboardInterrupt:
-            self.stop()
+            self.watchdog_stop()
 
-    def start(self):
+    def watchdog_start(self):
         self.__schedule()
         self.__event_observer.start()
 
-    def stop(self):
+    def watchdog_stop(self):
         self.__event_observer.stop()
         self.__event_observer.join()
 
     def __schedule(self):
-        self.__event_observer.schedule(
-            self.__event_handler,
-            self.__src_path,
-            recursive=True
-        )
+        for workspace, handler in zip(self.watched_workspaces, self.event_handlers):
+            self.__event_observer.schedule(
+                handler,
+                workspace,
+                recursive=True
+            )
+            self.last_event_times.append(-1.0)
 
 
 if __name__ == "__main__":
+
     WorkspaceWatcher().run()
