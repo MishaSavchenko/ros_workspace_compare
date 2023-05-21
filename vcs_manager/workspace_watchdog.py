@@ -3,6 +3,9 @@ import time
 
 from watchdog.observers import Observer
 from .events import WorkspaceEventHandler
+from .vcs_manager import VCCompare
+
+import threading
 
 
 class WorkspaceWatcher(threading.Thread):
@@ -11,15 +14,17 @@ class WorkspaceWatcher(threading.Thread):
     event_handlers = []
     last_event_times = []
 
+    vc_compare = None
 
-class WorkspaceWatcher:
     def __init__(self):
 
+        self.vc_compare = VCCompare()
 
         for workspace in self.watched_workspaces:
             self.event_handlers.append(WorkspaceEventHandler(workspace))
         self.__event_observer = Observer()
 
+        threading.Thread.__init__(self)
 
     def run(self):
         self.watchdog_start()
