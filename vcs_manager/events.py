@@ -6,12 +6,10 @@ from time import time, ctime
 
 
 class WorkspaceEventHandler(FileModifiedEvent):
-    last_time = None
+    last_time = 0.0
 
     def __init__(self, dir):
         super().__init__(dir)
 
     def dispatch(self, event):
         self.last_time = time()
-
-        print(ctime(time()), " : ", event)
