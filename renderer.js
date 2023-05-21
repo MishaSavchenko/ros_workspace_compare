@@ -1,18 +1,11 @@
-document.getElementById('dirs').addEventListener('click', () => {
+document.getElementById('workspace_adder').addEventListener('click', () => {
     window.postMessage({
-        type: 'select-dirs'
+        type: 'add_workspace'
     })
 })
 
-var coll = document.getElementsByClassName("collapsible");
-for (var i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function () {
-        this.classList.toggle("active");
-        var content = this.nextElementSibling;
-        if (content.style.display === "block") {
-            content.style.display = "none";
-        } else {
-            content.style.display = "block";
-        }
-    });
-}
+document.getElementById('ws_comp').addEventListener('click', () => {
+    window.postMessage({
+        type: 'ws-comp'
+    })
+})

@@ -1,11 +1,21 @@
 :root {
     color-scheme: light dark;
+
+    --background: #2e2e2e;
+    --comments: #797979;
+    --white: #d6d6d6;
+    --yellow: #e5b56775;
+    --green: #b4d27378;
+    --orange: #e87c3e76;
+    --purple: #af58ff;
+    --pink: #b05279;
+    --blue: #6c99bb;
 }
 
 @media (prefers-color-scheme: dark) {
     body {
-        background: #333;
-        color: white;
+        background: var(--background);
+        color: var(--white);
     }
 }
 
@@ -68,4 +78,36 @@
 .workspace_title {
     text-align: center;
     padding-top: 10px;
+}
+
+
+/* python difflib table stylings */
+
+table.diff {
+    /* font-family: Courier;
+    border: medium; */
+}
+
+.diff_header {
+    background-color: var(--background)
+}
+
+td.diff_header {
+    text-align: right
+}
+
+.diff_next {
+    background-color: var(--purple)
+}
+
+.diff_add {
+    background-color: var(--green)
+}
+
+.diff_chg {
+    background-color: var(--yellow)
+}
+
+.diff_sub {
+    background-color: var(--orange)
 }

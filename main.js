@@ -15,23 +15,23 @@ function createWindow() {
         height: 600,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
-            nodeIntegration: false,
+            nodeIntegration: true,
             enableRemoteModule: false,
-            contextIsolation: true,
+            contextIsolation: false,
             sandbox: false
         }
     })
     mainWindow.webContents.openDevTools();
 
     mainWindow.loadFile('index.html')
+    // mainWindow.loadFile('diff.html')
     mainWindow.on('closed', function () {
         mainWindow = null;
         subpy.kill('SIGINT');
     });
 }
 
-async function get_directories(directory) {
-    console.log("getting directories");
+async function add_workspace(directory) {
     return await fetch(mainAddr + "/add_workspace/" + directory)
         .then(response => response.json())
         .then(data => {
@@ -39,17 +39,27 @@ async function get_directories(directory) {
         });
 }
 
-ipcMain.handle('select-dirs', async (event, args) => {
-    let vcs_result = await get_directories("/home/misha/code/wbc_ws/src");
 
-    for (const key of Object.keys(vcs_result)) {
-        const inner_res = JSON.parse(vcs_result[key]);
-        vcs_result[key] = inner_res;
-    };
+ipcMain.handle('add_workspace', async (event, args) => {
+    const directory = await dialog.showOpenDialog(mainWindow, {
+        properties: ['openDirectory']
+    })
+    const res = await add_workspace(directory);
 
-    event.returnValue = vcs_result;
+    console.log('adding directory res :', res["response"]);
+})
 
-    return vcs_result;
+
+async function ws_comp() {
+    return await fetch(mainAddr + "/workspace_compare_test")
+        .then(response => response.json())
+        .then(data => {
+            return data;
+        });
+}
+
+ipcMain.handle('ws-comp', async (event, args) => {
+    return await ws_comp();
 })
 
 app.whenReady().then(() => {

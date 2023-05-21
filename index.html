@@ -9,30 +9,18 @@
 </head>
 
 <body>
-    <!-- <input type="file" id="dirs" /> -->
-    <button type="button" id="dirs">Open Workspace</button>
-    <div>
-        <strong> Current Workspace </strong>
-        <pre id="workspace_config"></pre>
+
+    <button type="button" id="workspace_adder">Add Workspace</button>
+
+    <div id="collapsible_template" hidden>
+        <button type="button" class="collapsible active">
+        </button>
     </div>
 
-    <div id="ws_a">
-        <button type="button" class="collapsible">Open Collapsible</button>
-        <div class="content">
-            <div class="past_workspace workspace_data">
-                <b class="workspace_title">Past Workspace</b>
-                <p></p>
-            </div>
-            <div class="current_workspace workspace_data">
-                <b class="workspace_title">Current Workspace</b>
-                <div></div>
-            </div>
-        </div>
-    </div>
+    <button type="button" id="ws_comp">Workspace Compare Test</button>
+    <div id="ws_comp_res"></div>
 
     <script src="renderer.js"></script>
-
 </body>
-
 
 </html>
