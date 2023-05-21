@@ -4,6 +4,15 @@ const { collapsable_callback } = require('./lib.js');
 
 
 window.addEventListener('message', async evt => {
+    if (evt.data.type === 'add_workspace') {
+        console.log("adding workspace");
+        const add_workspace = await ipcRenderer.invoke('add_workspace').then((result) => {
+            console.log("added workspace");
+        })
+    }
+})
+
+window.addEventListener('message', async evt => {
     if (evt.data.type === 'ws-comp') {
         const res = await ipcRenderer.invoke('ws-comp').then((result) => {
             return result;

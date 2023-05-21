@@ -31,6 +31,25 @@ function createWindow() {
     });
 }
 
+async function add_workspace(directory) {
+    return await fetch(mainAddr + "/add_workspace/" + directory)
+        .then(response => response.json())
+        .then(data => {
+            return data;
+        });
+}
+
+
+ipcMain.handle('add_workspace', async (event, args) => {
+    const directory = await dialog.showOpenDialog(mainWindow, {
+        properties: ['openDirectory']
+    })
+    const res = await add_workspace(directory);
+
+    console.log('adding directory res :', res["response"]);
+})
+
+
 async function ws_comp() {
     return await fetch(mainAddr + "/workspace_compare_test")
         .then(response => response.json())
