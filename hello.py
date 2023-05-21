@@ -20,10 +20,7 @@ def murder():
 
 @app.route('/add_workspace/<path:directory>')
 def add_workspace(directory):
-    # return directory
-    res = vc_compare.add_workspace("/"+directory)
-    headers = {directory: res}
-    return headers
+    return {"response": directory}
 
 
 @app.route('/workspace_compare_test')
